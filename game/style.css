@@ -2,17 +2,20 @@ body {
 	margin: 0;
 }
 .container {
-	margin: auto;
-	max-width: 600px;
+	height: 100%;
+	position: relative;	
 }
 .wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 10px;
+	max-width: 600px;
+	margin: auto;
+	height: 100vh;
 }
 h1{
-	margin-bottom: 40px;
+	margin: 0 0 40px 0;
 }
 .function {
 	display: flex;
@@ -37,30 +40,75 @@ h1{
 	align-items: center;
 	gap: 30px;
 }
+.wrapperAreaPlay{
+	position: relative;
+	z-index: 1;
+	
+}
+.shadow{
+	position: absolute;
+	top: 0;
+	left: auto;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.81);
+	z-index: 5;
+	transition: all 0.5s;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: gold;
+}
+.shadow.active{
+	display: flex;
+}
+.victory{
+	font-size: 20px;
+	margin: 0 0 15px 0;
+}
+.shadowMoves,
+.shadowTime {
+	margin: 0;
+}
+.volume{
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	align-self: flex-end;
+}
+.volumeOn.active svg path{
+	fill: red;
+}
+.volumeOut.active svg path{
+	fill: red;
+}
 .areaPlay{
 	background-color: rgb(210, 210, 190);
+	position: relative;
 	/* width: 300px;
 	height: 300px; */
 	/* border: 1px solid black; */
-	display: grid;
-	grid-template-columns: repeat(3, auto);
-	grid-template-rows: repeat(3, auto);
+	
 }
-.item{
-	width: 60px;
-	height: 60px;
+.cell{
+	position: absolute;
+/* 	width: 60px;
+	height: 60px; */
+	box-sizing: border-box;
 	background-color: white;
 	border: 1px solid black;
 	font-size: 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	transition: all 0.3s;
 }
-.empty {
-	border: 1px solid black;
-	background-color: rgb(210, 210, 190);
-}
-.item:hover {
+
+.cell:hover {
 	cursor: pointer;
 	background-color: rgb(233, 232, 232);
 }
@@ -89,6 +137,9 @@ margin: 0;
 	cursor: pointer;
 	color: black;
 }
+.showresult p{
+	margin: 5px 0;
+}
 @media (max-width: 500px) {
 	.wrapper{
 		font-size: 14px;
@@ -96,5 +147,4 @@ margin: 0;
 	h1{
 		font-size: 28px;
 	}
-	
 }
