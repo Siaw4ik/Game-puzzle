@@ -89,15 +89,15 @@ h1{
 .areaPlay{
 	background-color: rgb(210, 210, 190);
 	position: relative;
-	/* width: 300px;
-	height: 300px; */
+	width: 30vw;
+	height: 30vw;
 	/* border: 1px solid black; */
 	
 }
 .cell{
 	position: absolute;
-/* 	width: 60px;
-	height: 60px; */
+	/* width: 33.33333333333%;
+	height: 33.333333333%; */
 	box-sizing: border-box;
 	background-color: white;
 	border: 1px solid black;
@@ -140,11 +140,43 @@ margin: 0;
 .showresult p{
 	margin: 5px 0;
 }
-@media (max-width: 500px) {
+@media (max-width: 1000px) {
+	.areaPlay{
+		width: 50vw;
+		height: 50vw;
+	}
+}
+@media (max-width: 800px) {
+	.areaPlay{
+		width: 60vw;
+		height: 60vw;
+	}
+}
+@media (max-width: 600px) {
+	.areaPlay{
+		width: 70vw;
+		height: 70vw;
+	}
 	.wrapper{
 		font-size: 14px;
 	}
 	h1{
 		font-size: 28px;
+	}
+	.cell{
+		font-size: 16px;
+		
+	}
+}
+@media (max-width: 400px) {
+	.areaPlay{
+		width: 90vw;
+		height: 90vw;
+	}
+}
+@media (max-width: 350px) {
+	.areaPlay{
+		width: 95vw;
+		height: 95vw;
 	}
 }

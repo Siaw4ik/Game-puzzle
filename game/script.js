@@ -10,10 +10,18 @@ const volumeOnSvg = document.querySelector('.volumeOn svg');
 const volumeOutSvg = document.querySelector('.volumeOut svg');
 const shadow = document.querySelector('.shadow');
 const result = document.querySelector('.result');
+const stops = document.getElementById('stop');
+const contin = document.getElementById('continue');
+const save = document.getElementById('save');
+/* let isSave = true; */
 
+/* window.addEventListener('load', getLocalStorage);  */
 
 let countCell = 3;
 let isShaffle = false;
+/* let isSave = true; */
+let sizeCell = 60;
+
 
 sizes.addEventListener('click', function(event){
 	let target = event.target;
@@ -23,7 +31,7 @@ sizes.addEventListener('click', function(event){
 		console.log(countCell);
 		cleanAreaPlay();
 		cleanNumbers(countCell);
-		createArea(countCell, 60);
+		createArea(countCell);
 		stopTime();
 		shadow.classList.remove('active');
 		timeShow.textContent = `00:00`
@@ -41,11 +49,16 @@ let cells =[];
 cells.push(emptyCell)
 
 let numbers = [...Array(Math.pow(countCell, 2) - 1).keys()];
-let countMoves = 0
+let countMoves = 0;
 
-function createArea(size, oneCellSize){
-	areaPlay.style.width = `${size * oneCellSize}px`;
-	areaPlay.style.height = `${size * oneCellSize}px`;
+function createArea(size){
+	/* areaPlay.style.width = `${size * oneCellSize}px`;
+	areaPlay.style.height = `${size * oneCellSize}px`; */
+	if(size == 3){
+		areaPlay.style.width = '30vw';
+		areaPlay.style.height = '30vw';
+
+	}	
 
 	for (let i = 1; i <= (Math.pow(size,2) - 1); i++) {
 		let cell = document.createElement('div');
@@ -54,8 +67,10 @@ function createArea(size, oneCellSize){
 		cell.setAttribute('data-value', valueCell)
 		cell.innerHTML = valueCell;
 
-		cell.style.width = oneCellSize + 'px';
-		cell.style.height = oneCellSize + 'px';
+		const oneCellSize = 100 / size;
+		console.log(oneCellSize)
+		cell.style.width = 100 / size + '%';
+		cell.style.height = 100 / size + '%';
 
 		const left = (i -1) % size;
 		const top = ((i - left) - 1) / size
@@ -67,25 +82,34 @@ function createArea(size, oneCellSize){
 			element: cell
 		})
 
-		cell.style.left = `${left * oneCellSize}px`;
-		cell.style.top = `${top * oneCellSize}px`
+		cell.style.left = `${left * oneCellSize}%`;
+		cell.style.top = `${top * oneCellSize}%`
 
 		areaPlay.append(cell)
 	}
 	countMoves = 0;
 	moves.innerHTML = countMoves
 }
+/* if(isSave){
+	createArea(countCell, sizeCell);
+} */
 
-createArea(countCell, 60);
+createArea(countCell);
 
-function shift(index, oneCellSize){
+
+function shift(index, size){
 	const cell = cells[index]
 	const differenceLeft = Math.abs(emptyCell.left - cell.left);
   	const differenceTop = Math.abs(emptyCell.top - cell.top);
-  	if (differenceLeft + differenceTop > 1) return
+  	if (differenceLeft + differenceTop > 1) return;	 
 
-	cell.element.style.left = `${emptyCell.left * oneCellSize}px`;
-	cell.element.style.top = `${emptyCell.top * oneCellSize}px`
+	countMoves++;
+	moves.innerHTML = countMoves
+	deleteAudio();
+	audio();
+	const oneCellSize = 100 / size;
+	cell.element.style.left = `${emptyCell.left * oneCellSize}%`;
+	cell.element.style.top = `${emptyCell.top * oneCellSize}%`
 
 	const emptyLeft = emptyCell.left;
 	const emptyTop = emptyCell.top;
@@ -111,15 +135,12 @@ function cleanNumbers(size){
 }
 
 
-
-
 shuffle.addEventListener('click', function(){
 	console.log('shuffle')
-	numbers = [...Array(Math.pow(countCell, 2) - 1).keys()]/* .sort(() => Math.random() - 0.5); */
+	numbers = [...Array(Math.pow(countCell, 2) - 1).keys()].sort(() => Math.random() - 0.5);
 
 	cleanAreaPlay();
-	createArea(countCell, 60);
-	console.log(cells)
+	createArea(countCell);
 
 	let arrayCell = document.querySelectorAll('.cell');
 	for(let i = 0; i< arrayCell.length; i++){
@@ -138,13 +159,9 @@ areaPlay.addEventListener('click', function(event){
 	if(isShaffle){
 		target = event.target.closest('div');
 		if(target.className !== 'cell')return;
-		countMoves++;
-		moves.innerHTML = countMoves
 		let i = target.dataset.value;
 		console.log(i)
-		shift(i, 60);
-		deleteAudio();
-		audio();
+		shift(i, countCell/* , sizeCell */);
 		const isFinished = cells.every(cell => {
 			console.log(cell.value, cell.top, cell.left);
 			return cell.value === cell.top * countCell + ((cell.left % countCell) + 1);
@@ -189,18 +206,24 @@ function deleteAudio(){
 let startMoment;
 let newInterval;
 
-const startTime = () => {
+const startTime = (time) => {
+	function callTime(){
+		syncTime(time)
+	}
 	startMoment = new Date().getTime();
-	newInterval = setInterval(syncTime, 1000);
+	newInterval = setInterval(callTime, 1000);
 }
+
+let saveTime; //ms
 
 const stopTime = () => {
 	clearInterval(newInterval);
+	saveTime = new Date().getTime() - startMoment;
 }
 
-const syncTime = () => {
+const syncTime = (time = 0) => {
 	const now = new Date().getTime();
-	const diff = now - startMoment;
+	const diff = (now - startMoment) + time;
 	const minutes = roundDigits(Math.floor(diff/ 1000 / 60));
 	const seconds = roundDigits(Math.round((diff - (minutes * 60 * 1000)) / 1000));
 
@@ -233,3 +256,53 @@ for(let i = 0; i < arrayResult.slice(-10).length; i++){
 		elem.remove()
 	})
  }
+
+ stops.addEventListener('click', function(){
+	stopTime();
+	isShaffle = false
+ })
+ contin.addEventListener('click', function(){
+	startTime(saveTime);
+	isShaffle = true
+ })
+
+ save.addEventListener('click', function(){
+	/* isSave = false; */
+	localStorage.clear();
+	localStorage.setItem('storageArrayResult',JSON.stringify(arrayResult));
+	localStorage.setItem('storageIsSave',JSON.stringify(isSave));
+	localStorage.setItem('storageCells',JSON.stringify(cells));
+	localStorage.setItem('storageNumbers',JSON.stringify(numbers));
+	localStorage.setItem('storageCountCell',JSON.stringify(countCell));
+	localStorage.setItem('storageSizeCell', JSON.stringify(sizeCell));
+
+ })
+ 
+
+/*  window.addEventListener('load', getLocalStorage); */
+
+ /*  function getLocalStorage() {
+	let arrNew = JSON.parse(localStorage.getItem('storageArrayResult'));
+	console.log(arrNew);
+	let showResult = document.querySelector('.showresult');
+	for(let i = 0; i < arrNew.slice(-10).length; i++){
+		let p = document.createElement('p');
+		p.innerHTML = `${i + 1}.  Moves: ${arrNew.slice(-10)[i][0]}   Time: ${arrNew.slice(-10)[i][1]}`;
+		showResult.append(p)
+	}
+
+	let storageIsSave = JSON.parse(localStorage.getItem('storageIsSave'));
+	let storageCountCell = JSON.parse(localStorage.getItem('storageCountCell'));
+	let storageSizeCell = JSON.parse(localStorage.getItem('storageSizeCell'));
+	let storageCells = JSON.parse(localStorage.getItem('storageCells'));
+	let storageNumbers = JSON.parse(localStorage.getItem('storageNumbers'));
+
+	isSave = storageIsSave
+	cells = storageCells;
+	numbers = storageNumbers;
+	console.log(`${typeof storageCountCell}: ${storageCountCell}`);
+	console.log(`${typeof storageSizeCell}: ${storageSizeCell}`);
+	console.log(storageCells);
+	console.log(storageNumbers);
+
+  } */
