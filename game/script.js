@@ -139,7 +139,7 @@ function cleanNumbers(size){
 
 shuffle.addEventListener('click', function(){
 	console.log('shuffle')
-	numbers = [...Array(Math.pow(countCell, 2) - 1).keys()].sort(() => Math.random() - 0.5);
+	numbers = [...Array(Math.pow(countCell, 2) - 1).keys()]/* .sort(() => Math.random() - 0.5) */;
 
 	cleanAreaPlay();
 	createArea(countCell);
@@ -289,12 +289,14 @@ for(let i = 0; i < arrayResult.slice(-10).length; i++){
   function getLocalStorage() {
 	let arrNew = JSON.parse(localStorage.getItem('storageArrayResult'));
 	console.log(arrNew);
+	if(arrNew){
 	let showResult = document.querySelector('.showresult');
 	for(let i = 0; i < arrNew.slice(-10).length; i++){
 		let p = document.createElement('p');
 		p.innerHTML = `${i + 1}.  Moves: ${arrNew.slice(-10)[i][0]}   Time: ${arrNew.slice(-10)[i][1]}`;
 		showResult.append(p)
 	}
+}
 
 	/* let storageIsSave = JSON.parse(localStorage.getItem('storageIsSave'));
 	let storageCountCell = JSON.parse(localStorage.getItem('storageCountCell'));
