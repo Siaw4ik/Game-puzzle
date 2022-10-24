@@ -139,7 +139,7 @@ function cleanNumbers(size){
 
 shuffle.addEventListener('click', function(){
 	console.log('shuffle')
-	numbers = [...Array(Math.pow(countCell, 2) - 1).keys()]/* .sort(() => Math.random() - 0.5) */;
+	numbers = [...Array(Math.pow(countCell, 2) - 1).keys()].sort(() => Math.random() - 0.5);
 
 	cleanAreaPlay();
 	createArea(countCell);
