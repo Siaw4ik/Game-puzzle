@@ -12,6 +12,7 @@ const shadow = document.querySelector('.shadow');
 const result = document.querySelector('.result');
 const stops = document.getElementById('stop');
 const contin = document.getElementById('continue');
+const frameSize = document.querySelector('.frameSize span');
 const save = document.getElementById('save');
 /* let isSave = true; */
 
@@ -26,7 +27,6 @@ let sizeCell = 60;
 sizes.addEventListener('click', function(event){
 	let target = event.target;
 	if(target.tagName === 'SPAN'){
-		/* frameSize.innerHTML = target.innerHTML; */
 		countCell = Math.sqrt(target.dataset.number);	
 		console.log(countCell);
 		cleanAreaPlay();
@@ -54,11 +54,11 @@ let countMoves = 0;
 function createArea(size){
 	/* areaPlay.style.width = `${size * oneCellSize}px`;
 	areaPlay.style.height = `${size * oneCellSize}px`; */
-	if(size == 3){
+	/* if(size == 3){
 		areaPlay.style.width = '30vw';
 		areaPlay.style.height = '30vw';
 
-	}	
+	} */	
 
 	for (let i = 1; i <= (Math.pow(size,2) - 1); i++) {
 		let cell = document.createElement('div');
@@ -89,6 +89,8 @@ function createArea(size){
 	}
 	countMoves = 0;
 	moves.innerHTML = countMoves
+
+	frameSize.innerHTML =`${size}x${size}`;
 }
 /* if(isSave){
 	createArea(countCell, sizeCell);
@@ -270,18 +272,18 @@ for(let i = 0; i < arrayResult.slice(-10).length; i++){
 	/* isSave = false; */
 	localStorage.clear();
 	localStorage.setItem('storageArrayResult',JSON.stringify(arrayResult));
-	localStorage.setItem('storageIsSave',JSON.stringify(isSave));
-	localStorage.setItem('storageCells',JSON.stringify(cells));
+	/* localStorage.setItem('storageIsSave',JSON.stringify(isSave)); */
+	/* localStorage.setItem('storageCells',JSON.stringify(cells));
 	localStorage.setItem('storageNumbers',JSON.stringify(numbers));
 	localStorage.setItem('storageCountCell',JSON.stringify(countCell));
-	localStorage.setItem('storageSizeCell', JSON.stringify(sizeCell));
+	localStorage.setItem('storageSizeCell', JSON.stringify(sizeCell)); */
 
  })
  
 
-/*  window.addEventListener('load', getLocalStorage); */
+ window.addEventListener('load', getLocalStorage);
 
- /*  function getLocalStorage() {
+  function getLocalStorage() {
 	let arrNew = JSON.parse(localStorage.getItem('storageArrayResult'));
 	console.log(arrNew);
 	let showResult = document.querySelector('.showresult');
@@ -291,18 +293,18 @@ for(let i = 0; i < arrayResult.slice(-10).length; i++){
 		showResult.append(p)
 	}
 
-	let storageIsSave = JSON.parse(localStorage.getItem('storageIsSave'));
+	/* let storageIsSave = JSON.parse(localStorage.getItem('storageIsSave'));
 	let storageCountCell = JSON.parse(localStorage.getItem('storageCountCell'));
 	let storageSizeCell = JSON.parse(localStorage.getItem('storageSizeCell'));
 	let storageCells = JSON.parse(localStorage.getItem('storageCells'));
-	let storageNumbers = JSON.parse(localStorage.getItem('storageNumbers'));
+	let storageNumbers = JSON.parse(localStorage.getItem('storageNumbers')); */
 
-	isSave = storageIsSave
-	cells = storageCells;
+	
+	/* cells = storageCells;
 	numbers = storageNumbers;
 	console.log(`${typeof storageCountCell}: ${storageCountCell}`);
 	console.log(`${typeof storageSizeCell}: ${storageSizeCell}`);
 	console.log(storageCells);
-	console.log(storageNumbers);
+	console.log(storageNumbers); */
 
-  } */
+  }

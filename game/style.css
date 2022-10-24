@@ -142,14 +142,14 @@ margin: 0;
 }
 @media (max-width: 1000px) {
 	.areaPlay{
-		width: 50vw;
-		height: 50vw;
+		width: 40vw;
+		height: 40vw;
 	}
 }
 @media (max-width: 800px) {
 	.areaPlay{
-		width: 60vw;
-		height: 60vw;
+		width: 50vw;
+		height: 50vw;
 	}
 }
 @media (max-width: 600px) {
