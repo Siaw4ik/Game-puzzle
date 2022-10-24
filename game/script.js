@@ -178,15 +178,18 @@ areaPlay.addEventListener('click', function(event){
 	}	  
 })
 
-let volumeO = 1
+let volumeO = 1;
+audio();
 
 function audio(){
 	volumeOutSvg.addEventListener('click', function(){
+		console.log('out')
 		volumeO = 0
 		volumeOut.classList.add('active')
 		volumeOn.classList.remove('active')
 	})
 	volumeOnSvg.addEventListener('click', function(){
+		console.log('on')
 		volumeO = 1
 		volumeOut.classList.remove('active')
 		volumeOn.classList.add('active')
@@ -194,7 +197,7 @@ function audio(){
 
 	let audio = document.createElement('audio');
 	audio.className = 'audio';
-	audio.setAttribute("autoplay", 'false');
+	audio.setAttribute("autoplay", "false");
 	audio.innerHTML = "<source src='../game/assets/audio/knopka-klik-odinochnyii-korotkii-myagkii-priglushennyii.mp3'>";
 	audio.volume = volumeO;
 	wrapArea.prepend(audio);
