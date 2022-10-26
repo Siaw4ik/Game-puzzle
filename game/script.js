@@ -109,8 +109,8 @@ let numbers = [...Array(Math.pow(countCell, 2) - 1).keys()];
 let countMoves = 0;
 
 function createArea(size){
-		numbers = [...Array(Math.pow(countCell, 2) - 1).keys()].sort(() => Math.random() - 0.5);
-		for (let i = 1; i <= (Math.pow(size,2) - 1); i++) {
+	numbers = [...Array(Math.pow(countCell, 2) - 1).keys()].sort(() => Math.random() - 0.5);
+	for (let i = 1; i <= (Math.pow(size,2) - 1); i++) {
 		let cell = document.createElement('div');
 		const valueCell = numbers[i - 1] + 1;
 		cell.className = 'cell';
