@@ -92,6 +92,7 @@ h1{
 	width: 30vw;
 	height: 30vw;
 	/* border: 1px solid black; */
+	transition: all 0.3s;
 	
 }
 .cell{
