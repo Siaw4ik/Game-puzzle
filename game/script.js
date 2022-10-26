@@ -76,7 +76,7 @@ const save = document.getElementById('save');
 /* let isSave = true; */
 /* window.addEventListener('load', getLocalStorage);  */
 
-let countCell = 3;
+let countCell = 4;
 let isShaffle = false;
 /* let isSave = true; */
 let sizeCell = 60;
