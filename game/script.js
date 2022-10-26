@@ -109,15 +109,8 @@ let numbers = [...Array(Math.pow(countCell, 2) - 1).keys()];
 let countMoves = 0;
 
 function createArea(size){
-	/* areaPlay.style.width = `${size * oneCellSize}px`;
-	areaPlay.style.height = `${size * oneCellSize}px`; */
-	/* if(size == 3){
-		areaPlay.style.width = '30vw';
-		areaPlay.style.height = '30vw';
-
-	} */	
-
-	for (let i = 1; i <= (Math.pow(size,2) - 1); i++) {
+		numbers = [...Array(Math.pow(countCell, 2) - 1).keys()].sort(() => Math.random() - 0.5);
+		for (let i = 1; i <= (Math.pow(size,2) - 1); i++) {
 		let cell = document.createElement('div');
 		const valueCell = numbers[i - 1] + 1;
 		cell.className = 'cell';
