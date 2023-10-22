@@ -1,0 +1,183 @@
+body {
+	margin: 0;
+}
+.container {
+	height: 100%;
+	position: relative;	
+}
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+	max-width: 600px;
+	margin: auto;
+	height: 100vh;
+}
+h1{
+	margin: 0 0 40px 0;
+}
+.function {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+}
+.function div {
+	color: white;
+	border-radius: 5px;
+	background-color: rgb(85, 129, 111);
+	padding: 5px 10px;
+}
+.function div:hover {
+	cursor: pointer;
+	background-color: rgb(94, 96, 95);
+
+}
+.moves_and_time {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 30px;
+}
+.wrapperAreaPlay{
+	position: relative;
+	z-index: 1;
+	
+}
+.shadow{
+	position: absolute;
+	top: 0;
+	left: auto;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.81);
+	z-index: 5;
+	transition: all 0.5s;
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: gold;
+}
+.shadow.active{
+	display: flex;
+}
+.victory{
+	font-size: 20px;
+	margin: 0 0 15px 0;
+}
+.shadowMoves,
+.shadowTime {
+	margin: 0;
+}
+.volume{
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	justify-content: center;
+	align-self: flex-end;
+}
+.volumeOn.active svg path{
+	fill: red;
+}
+.volumeOut.active svg path{
+	fill: red;
+}
+.areaPlay{
+	background-color: rgb(210, 210, 190);
+	position: relative;
+	width: 30vw;
+	height: 30vw;
+	/* border: 1px solid black; */
+	transition: all 0.3s;
+	
+}
+.cell{
+	position: absolute;
+	/* width: 33.33333333333%;
+	height: 33.333333333%; */
+	box-sizing: border-box;
+	background-color: white;
+	border: 1px solid black;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s;
+}
+
+.cell:hover {
+	cursor: pointer;
+	background-color: rgb(233, 232, 232);
+}
+
+.sizes,
+.sizes ul {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.sizes ul {
+padding: 0;
+margin: 0;
+}
+.sizes li {
+	list-style-type: none;
+	margin-left: 10px;
+
+}
+.sizes li span{
+	text-decoration: underline;
+	color: blue;
+}
+.sizes li span:hover{
+	text-decoration: underline;
+	cursor: pointer;
+	color: black;
+}
+.showresult p{
+	margin: 5px 0;
+}
+@media (max-width: 1000px) {
+	.areaPlay{
+		width: 40vw;
+		height: 40vw;
+	}
+}
+@media (max-width: 800px) {
+	.areaPlay{
+		width: 50vw;
+		height: 50vw;
+	}
+}
+@media (max-width: 600px) {
+	.areaPlay{
+		width: 70vw;
+		height: 70vw;
+	}
+	.wrapper{
+		font-size: 14px;
+	}
+	h1{
+		font-size: 28px;
+	}
+	.cell{
+		font-size: 16px;
+		
+	}
+}
+@media (max-width: 400px) {
+	.areaPlay{
+		width: 90vw;
+		height: 90vw;
+	}
+}
+@media (max-width: 350px) {
+	.areaPlay{
+		width: 95vw;
+		height: 95vw;
+	}
+}
