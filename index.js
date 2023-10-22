@@ -248,7 +248,7 @@ function audio(){
 	let audio = document.createElement('audio');
 	audio.className = 'audio';
 	audio.setAttribute("autoplay", "false");
-	audio.innerHTML = "<source src='../game/assets/audio/knopka-klik-odinochnyii-korotkii-myagkii-priglushennyii.mp3'>";
+	audio.innerHTML = "<source src='./assets/audio/knopka-klik-odinochnyii-korotkii-myagkii-priglushennyii.mp3'>";
 	audio.volume = volumeO;
 	wrapArea.prepend(audio);
 }
